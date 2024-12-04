@@ -1,14 +1,11 @@
 import { model, Schema } from 'mongoose';
 
-
 import {
   Guardian,
   localGuardian,
   Student,
   UserName,
 } from './student/student.interface';
-
-
 
 // UserName Schema with validations
 const userNameSchema = new Schema<UserName>({
@@ -85,8 +82,8 @@ const localGuardianSchema = new Schema<localGuardian>({
 
 // Student Schema with validations
 const studentSchema = new Schema<Student>({
-  id: { 
-    type: String, 
+  id: {
+    type: String,
     required: [true, 'Student ID is required'],
     // unique: true, // Ensure that the ID is unique
     // minlength: [5, 'Student ID should be at least 5 characters long'],
@@ -101,28 +98,25 @@ const studentSchema = new Schema<Student>({
     },
     required: [true, 'Gender is required'],
   },
-  dateOfBirth: { 
+  dateOfBirth: {
     type: String,
-   
-
 
     // match: [/^\d{4}-\d{2}-\d{2}$/, 'Please provide a valid date of birth (YYYY-MM-DD)'],
   },
-  email: { 
+  email: {
     type: String,
     required: [true, 'Email is required'],
-    
   },
-  contactNo: { 
+  contactNo: {
     type: String,
     required: [true, 'Contact number is required'],
-  
   },
   bloodGroup: {
     type: String,
     enum: {
       values: ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'],
-      message: 'Blood group must be one of the following: A+, A-, B+, B-, AB+, AB-, O+, O-',
+      message:
+        'Blood group must be one of the following: A+, A-, B+, B-, AB+, AB-, O+, O-',
     },
   },
   presentAddress: {
@@ -152,7 +146,6 @@ const studentSchema = new Schema<Student>({
     default: 'active',
   },
 });
-
 
 // Create Model
 export const StudentModel = model<Student>('Student', studentSchema);
