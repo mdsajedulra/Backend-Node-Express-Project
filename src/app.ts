@@ -12,6 +12,7 @@ import express, {
 import cors from 'cors';
 import notFound from './app/middlewares/notFound';
 import globalErrorHandler from './app/middlewares/globalErrorhandler';
+import { UserRoutes } from './app/modules/user/user.route';
 
 const app: Application = express();
 
@@ -20,15 +21,15 @@ app.use(cors());
 
 // "Not Found" Middleware (Handles unmatched routes)
 
-app.use(notFound as RequestHandler);
-
 const getController = (req: Request, res: Response) => {
   res.send('Hello World!');
 };
 
 app.get('/', getController);
+app.use('/api/v1');
 app.use(globalErrorHandler as unknown as RequestHandler);
 
+app.use(notFound as RequestHandler);
 // global errohandler
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

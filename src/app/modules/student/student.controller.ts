@@ -1,41 +1,32 @@
-import { NextFunction, Request, Response } from 'express';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-unused-vars */
+import { StatusCodes } from 'http-status-codes';
 import { StudentServices } from './student.service';
+import sendResponse from '../../utils/sendResponse';
+import catchAsync from '../../utils/catchAsync';
 
-const getAllStudents = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
-  try {
-    const result = await StudentServices.getAllStudentsFromDB();
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const getAllStudents = catchAsync(async (req, res, next) => {
+  const result = await StudentServices.getAllStudentsFromDB();
 
-    res.status(200).json({
-      success: true,
-      message: 'student are retirved successfully',
-      data: result,
-    });
-  } catch (error) {
-    next(error);
-  }
-};
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'Student Get successfuly',
+    data: result,
+  });
+});
 
-const getSingleData = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
-  try {
-    const result = await StudentServices.getSingleFromDB();
+const getSingleData = catchAsync(async (req, res, next) => {
+  const result = await StudentServices.getSingleFromDB();
 
-    res.status(200).json({
-      success: true,
-      message: 'one studetn data retirved successfully',
-      data: result,
-    });
-  } catch (error) {
-    next(error);
-  }
-};
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: 'Single Student Get successfuly',
+    data: result,
+  });
+});
 
 export const StudentControllers = {
   getAllStudents,

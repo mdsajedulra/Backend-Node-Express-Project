@@ -4,13 +4,13 @@ import { TUser } from './user.interface';
 import { User } from './user.model';
 
 const createStudentIntoDB = async (password: string, studentData: TStudent) => {
-  const uesrData: Partial<TUser> = {};
+  const userData: Partial<TUser> = {};
 
-  uesrData.password = password || process.env.DEFAULT_PASSWORD;
-  uesrData.role = 'student';
-  uesrData.id = '1526515';
+  userData.password = password || process.env.DEFAULT_PASSWORD;
+  userData.role = 'student';
+  userData.id = '1526515';
 
-  const newUser = await User.create(uesrData);
+  const newUser = await User.create(userData);
 
   if (Object.keys(newUser).length) {
     studentData.id = newUser.id;
