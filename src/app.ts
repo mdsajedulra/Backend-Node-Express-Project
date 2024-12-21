@@ -29,6 +29,6 @@ const getController = (req: Request, res: Response) => {
 };
 
 app.get('/', getController);
-app.use(globalErrorHandler as RequestHandler);
+app.use(globalErrorHandler as unknown as RequestHandler);
 
 export default app;
