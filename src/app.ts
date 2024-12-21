@@ -1,15 +1,15 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-unused-vars */
 import express, {
   Application,
+  ErrorRequestHandler,
   NextFunction,
   Request,
   RequestHandler,
   Response,
 } from 'express';
 import cors from 'cors';
-// import { StudentRoutes } from './app/config/modules/student/student.route';
-import { UserRoutes } from './app/modules/user/user.route';
-
 import notFound from './app/middlewares/notFound';
 import globalErrorHandler from './app/middlewares/globalErrorhandler';
 
@@ -17,8 +17,6 @@ const app: Application = express();
 
 app.use(express.json());
 app.use(cors());
-
-// application routes
 
 // "Not Found" Middleware (Handles unmatched routes)
 
@@ -30,5 +28,10 @@ const getController = (req: Request, res: Response) => {
 
 app.get('/', getController);
 app.use(globalErrorHandler as unknown as RequestHandler);
+
+// global errohandler
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+app.use(globalErrorHandler as ErrorRequestHandler);
 
 export default app;
